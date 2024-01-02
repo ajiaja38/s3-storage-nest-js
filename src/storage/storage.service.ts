@@ -6,11 +6,9 @@ import { resolve } from 'path';
 
 @Injectable()
 export class StorageService {
-  configService: ConfigService;
   client: S3Client;
 
-  constructor() {
-    this.configService = new ConfigService();
+  constructor(private readonly configService: ConfigService) {
     this.client = new S3Client({
       credentials: {
         accessKeyId: this.configService.get<string>('accesskey'),
